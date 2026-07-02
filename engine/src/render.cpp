@@ -26,7 +26,7 @@ namespace engine
 
     void Renderer::drawButton(const Button& button) const
     {
-        DrawRectangle(button.rect.x, button.rect.y, button.rect.width, button.rect.height, button.color);
+        DrawRectangle(button.rect.x, button.rect.y, button.rect.width, button.rect.height, button.currentColor);
 
         Vector2 textSize = MeasureTextEx(GetFontDefault(), button.label.content.c_str(), button.label.fontSize, button.label.spacing);
         Vector2 textPosition = {button.rect.x + (button.rect.width - textSize.x) / 2, button.rect.y + (button.rect.height - textSize.y) / 2};
