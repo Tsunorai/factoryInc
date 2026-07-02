@@ -1,9 +1,6 @@
 #pragma once
 
 #include "structs/scene.hpp"
-#include "structs/button.hpp"
-
-#include <vector>
 
 namespace FInc
 {
@@ -15,8 +12,5 @@ namespace FInc
         void render(const engine::Renderer& renderer) override;
 
         void createMenu();
-
-    private:
-        std::vector<engine::Button> buttons;
     };
 } // namespace FInc

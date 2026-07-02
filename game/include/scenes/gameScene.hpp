@@ -1,10 +1,6 @@
 #pragma once
 
-#include "structs/actor.hpp"
 #include "structs/scene.hpp"
-
-#include <memory>
-#include <vector>
 
 namespace FInc
 {
@@ -14,8 +10,5 @@ namespace FInc
         GameScene();
         engine::SceneResult update() override;
         void render(const engine::Renderer& renderer) override;
-
-    private:
-        std::vector<std::unique_ptr<engine::Actor>> entities{};
     };
 } // namespace FInc

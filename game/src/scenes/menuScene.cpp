@@ -23,9 +23,9 @@ namespace FInc
             return {engine::SceneAction::ChangeScene, std::move(std::make_unique<GameScene>())};
         }
 
-        for (auto& button : buttons)
+        for (auto& element : actors)
         {
-            button.update();
+            element->update();
         }
 
         return {engine::SceneAction::None};
@@ -34,17 +34,16 @@ namespace FInc
     void MenuScene::render(const engine::Renderer& renderer)
     {
         renderer.drawBackground(RED);
-        for (auto& button : buttons)
+        for (const auto& actor : actors)
         {
-            renderer.drawButton(button);
+            actor->render(renderer);
         }
-        // Render menu UI elements here
     }
 
     void MenuScene::createMenu()
     {
         // will be replaced by configuration in json or something
-        engine::Button btn1{0, 0, 300, 150, BLUE, "Button"};
-        buttons.push_back(btn1);
+        std::unique_ptr<engine::Actor> btn = std::make_unique<engine::Button>(engine::getScreenWidth() / 2.0f - 150, engine::getScreenHeight() / 2.0f - 75, 300, 150, BLUE, "Button");
+        actors.push_back(std::move(btn));
     }
 } // namespace FInc

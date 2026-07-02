@@ -1,9 +1,11 @@
 #pragma once
 
-#include "structs/button.hpp"
+#include <raylib.h>
 
 namespace engine
 {
+    class Button; 
+
     struct Renderer
     {
         void beginFrame() const;

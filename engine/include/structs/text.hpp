@@ -10,6 +10,7 @@ namespace engine
         std::string content;
         int fontSize;
         Font font;
+        float spacing;
         Color color;
     };
 } // namespace engine
