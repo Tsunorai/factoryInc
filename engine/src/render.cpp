@@ -2,8 +2,6 @@
 
 #include "structs/button.hpp"
 
-#include <raylib.h>
-
 namespace engine
 {
     void Renderer::beginFrame() const
