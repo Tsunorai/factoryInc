@@ -1,5 +1,6 @@
 file(GLOB GAME_SOURCES CONFIGURE_DEPENDS
     src/*.cpp
+    src/scenes/*.cpp
 )
 
 add_library(Game ${GAME_SOURCES})

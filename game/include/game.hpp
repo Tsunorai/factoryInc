@@ -1,15 +1,20 @@
 #pragma once
 
-#include "scene.hpp"
-#include <engine.hpp>
+#include "engine.hpp"
+#include "structs/scene.hpp"
+
 #include <memory>
 
 namespace FInc
 {
     struct Game
     {
+    public:
         void init();
         void run();
+
+    private:
+        void update();
 
     private:
         engine::Engine engine;
