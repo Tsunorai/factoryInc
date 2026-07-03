@@ -3,6 +3,7 @@
 #include "structs/actor.hpp"
 #include "structs/text.hpp"
 
+#include <functional>
 #include <raylib.h>
 
 namespace engine
@@ -10,7 +11,7 @@ namespace engine
     class Button : public Actor
     {
     public:
-        Button(const float x, const float y, const float width, const float height, const Color btnColor, const std::string content, const int fontSize = 20, const Font font = GetFontDefault(), const float spacing = 1.0f, const Color txtColor = WHITE);
+        Button(const std::function<void()>& onClick, const float x, const float y, const float width, const float height, const Color btnColor, const std::string content, const int fontSize = 20, const Font font = GetFontDefault(), const float spacing = 1.0f, const Color txtColor = WHITE);
         void update() override;
         void render(const Renderer& render) override;
 
@@ -21,6 +22,7 @@ namespace engine
         Color hoverColor;
         Color currentColor;
         Text label;
+        std::function<void()> onClick;
 
         bool hideHover = false;
     };

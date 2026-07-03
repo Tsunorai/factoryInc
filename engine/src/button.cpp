@@ -2,7 +2,7 @@
 
 namespace engine
 {
-    Button::Button(const float x, const float y, const float width, const float height, const Color btnColor, const std::string content, const int fontSize, const Font font, const float spacing, const Color txtColor) : normalColor(btnColor), currentColor(btnColor)
+    Button::Button(const std::function<void()>& onClick, const float x, const float y, const float width, const float height, const Color btnColor, const std::string content, const int fontSize, const Font font, const float spacing, const Color txtColor) : onClick(onClick), normalColor(btnColor), currentColor(btnColor)
     {
         hoverColor = darken(btnColor, 0.8f);
         rect = {x, y, width, height};
@@ -19,6 +19,11 @@ namespace engine
         else
         {
             currentColor = normalColor;
+        }
+
+        if (isHovered && IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        {
+            onClick();
         }
     };
 
