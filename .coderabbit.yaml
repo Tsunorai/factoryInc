@@ -1,0 +1,71 @@
+# .coderabbit.yaml
+
+language: en-US
+
+reviews:
+  profile: "assertive"
+
+  request_changes_workflow: true
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+
+  auto_review:
+    enabled: true
+    drafts: false
+
+  path_filters:
+    - "**/*.cpp"
+    - "**/*.hpp"
+    - "**/*.yaml"
+    - "**/*.txt"
+
+chat:
+  auto_reply: true
+
+reviews:
+   instructions: |
+   You are reviewing a modern C++ game/game-engine codebase.
+
+   1. Maintainability
+      - Suggest cleaner designs.
+      - Reduce complexity.
+      - Identify large or overly coupled functions/classes.
+      - Point out opportunities for better abstractions.
+      - Recommend clearer naming where appropriate.
+
+   2. Modern C++
+      - Suggest C++20/23 features when they improve readability.
+      - Recommend std::ranges pipelines where appropriate.
+      - Suggest std::views instead of manual loops when beneficial.
+      - Recommend std::ranges::for_each instead of explicit loops where it improves clarity.
+      - Suggest structured bindings.
+      - Suggest constexpr, consteval, constinit when applicable.
+      - Recommend std::span instead of pointer + size.
+      - Suggest std::optional instead of sentinel values.
+      - Suggest std::string_view where ownership is unnecessary.
+      - Recommend concepts instead of SFINAE where appropriate.
+      - Prefer RAII over manual resource management.
+      - Recommend smart pointers only when ownership semantics require them.
+
+   3. Performance
+      - Point out unnecessary allocations.
+      - Identify needless copies.
+      - Suggest move semantics where beneficial.
+      - Highlight cache-friendly data layouts where relevant.
+      - Mention algorithmic improvements.
+
+   4. Game Engine Best Practices
+      - Look for ownership issues.
+      - Watch for lifetime bugs.
+      - Check ECS-friendly patterns where applicable.
+      - Identify opportunities to separate data from behavior.
+      - Warn about hidden allocations in hot paths.
+      - Mention thread-safety concerns when applicable.
+
+   Review philosophy:
+   - Explain why a suggested change improves readability, maintainability, safety, or performance.
+   - Prefer simple, readable code over clever code if performance is not impacted.
+   - When suggesting a modern C++ feature, include a short example.
+   - If the current implementation is already good, explicitly say so instead of inventing issues.
