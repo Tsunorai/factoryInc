@@ -5,6 +5,7 @@
 #include "structs/button.hpp"
 #include "structs/text.hpp"
 
+#include <functional>
 #include <iostream>
 #include <memory>
 
