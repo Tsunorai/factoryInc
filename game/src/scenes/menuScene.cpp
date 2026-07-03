@@ -1,12 +1,10 @@
 #include "scenes/menuScene.hpp"
 
+#include "engineMapping.hpp"
+#include "scenes/gameScene.hpp"
 #include "structs/button.hpp"
 #include "structs/text.hpp"
-#include "engineMapping.hpp"
-#include "structs/keys.hpp"
-#include "scenes/gameScene.hpp"
 
-#include <functional>
 #include <iostream>
 #include <memory>
 
@@ -20,22 +18,18 @@ namespace FInc
 
     engine::SceneResult MenuScene::update()
     {
-        if (engine::isKeyPressed(engine::KEY_ENTER))
-        {
-            return {engine::SceneAction::ChangeScene, std::move(std::make_unique<GameScene>())};
-        }
-
         for (auto& element : actors)
         {
             element->update();
         }
 
-        return {engine::SceneAction::None};
+        return std::move(sceneResult);
     }
 
     void MenuScene::render(const engine::Renderer& renderer)
     {
-        renderer.drawBackground(RED);
+        // todo have non raylib colors
+        renderer.drawBackground(BLACK);
         for (const auto& actor : actors)
         {
             actor->render(renderer);
@@ -46,15 +40,37 @@ namespace FInc
     {
         // will be replaced by configuration in json or something
 
-        std::function<void()> func = []() {
-            std::cout << "Button clicked!" << std::endl;
+        auto playFunc = [this]() {
+            sceneResult = {engine::SceneAction::ChangeScene, std::make_unique<GameScene>()};
         };
 
         // todo menu creation on replace withouth raylib reference
-        Rectangle rect = {engine::getScreenWidth() / 2.0f - 150, engine::getScreenHeight() / 2.0f - 75, 300, 150};
-        engine::Text label = {"Play", 30, GetFontDefault(), 1.0f, WHITE};
+        Rectangle rect = {engine::getScreenWidth() / 2.0f - 150, engine::getScreenHeight() / 4.0f - 75, 300, 150};
+        engine::Text label("Play");
 
-        std::unique_ptr<engine::Actor> btn = std::make_unique<engine::Button>(func, rect, BLUE, label);
+        auto btn = std::make_unique<engine::Button>(playFunc, rect, label);
         actors.push_back(std::move(btn));
+
+        auto settingsFunc = []() {
+            std::cout << "Settings button clicked WIP" << std::endl;
+        };
+
+        // todo menu creation on replace withouth raylib reference
+        Rectangle rect2 = {engine::getScreenWidth() / 2.0f - 150, engine::getScreenHeight() / 4.0f * 2.0f - 75, 300, 150};
+        engine::Text label2("Settings");
+
+        auto btn2 = std::make_unique<engine::Button>(settingsFunc, rect2, label2);
+        actors.push_back(std::move(btn2));
+
+        auto quitFunc = [this]() {
+            sceneResult = {engine::SceneAction::Quit};
+        };
+
+        // todo menu creation on replace withouth raylib reference
+        Rectangle rect3 = {engine::getScreenWidth() / 2.0f - 150, engine::getScreenHeight() / 4.0f * 3.0f - 75, 300, 150};
+        engine::Text label3("Quit");
+
+        auto btn3 = std::make_unique<engine::Button>(quitFunc, rect3, label3);
+        actors.push_back(std::move(btn3));
     }
 } // namespace FInc

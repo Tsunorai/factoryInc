@@ -2,7 +2,7 @@
 
 namespace engine
 {
-    Button::Button(const std::function<void()>& onClick, Rectangle rect, Color btnColor, Text label) : onClick(onClick), rect(rect), normalColor(btnColor), currentColor(btnColor), label(label)
+    Button::Button(const std::function<void()>& onClick, const Rectangle rect, const Text label, const Color btnColor) : onClick(onClick), rect(rect), normalColor(btnColor), currentColor(btnColor), label(label)
     {
         hoverColor = darken(btnColor, 0.8f);
     };

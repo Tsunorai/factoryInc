@@ -6,7 +6,13 @@ namespace engine
 {
     void Engine::init()
     {
-        InitWindow(800, 600, "Factory Inc.");
+        InitWindow(1920, 1080, "Factory Inc.");
+        SetExitKey(KEY_NULL);
+    }
+
+    void Engine::shutdown()
+    {
+        exitRequested = true;
     }
 
     void Engine::clean()
@@ -31,6 +37,6 @@ namespace engine
 
     bool Engine::isRunning()
     {
-        return !WindowShouldClose();
+        return !exitRequested && !WindowShouldClose();
     }
 } // namespace engine

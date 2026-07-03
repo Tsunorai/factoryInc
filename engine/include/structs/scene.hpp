@@ -15,7 +15,7 @@ namespace engine
         virtual SceneResult update() = 0;
         virtual void render(const Renderer& renderer) = 0;
 
-        virtual ~Scene() {}
+        virtual ~Scene() = default;
 
         std::vector<std::unique_ptr<engine::Actor>> actors;
     };

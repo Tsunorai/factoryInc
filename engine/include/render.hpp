@@ -4,7 +4,7 @@
 
 namespace engine
 {
-    class Button; 
+    class Button;
 
     struct Renderer
     {

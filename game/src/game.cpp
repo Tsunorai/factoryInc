@@ -21,7 +21,6 @@ namespace FInc
             currentScene->render(engine.getRenderer());
             engine.endFrame();
         }
-
         engine.clean();
     }
 
@@ -33,6 +32,10 @@ namespace FInc
         {
             currentScene = std::move(result.newScene);
             // currentScene->init();
+        }
+        else if (result.action == engine::SceneAction::Quit)
+        {
+            engine.shutdown();
         }
     }
 } // namespace FInc
