@@ -11,11 +11,11 @@ namespace engine
     class Button : public Actor
     {
     public:
-        Button(const std::function<void()>& onClick, const float x, const float y, const float width, const float height, const Color btnColor, const std::string content, const int fontSize = 20, const Font font = GetFontDefault(), const float spacing = 1.0f, const Color txtColor = WHITE);
+        Button(const std::function<void()>& onClick, Rectangle rect, Color btnColor, Text label);
         void update() override;
         void render(const Renderer& render) override;
 
-        Color darken(const Color& darken, const float factor) const;
+        Color darken(const Color& color, const float factor) const;
 
         Rectangle rect;
         Color normalColor;

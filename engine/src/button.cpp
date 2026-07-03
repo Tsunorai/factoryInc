@@ -2,11 +2,9 @@
 
 namespace engine
 {
-    Button::Button(const std::function<void()>& onClick, const float x, const float y, const float width, const float height, const Color btnColor, const std::string content, const int fontSize, const Font font, const float spacing, const Color txtColor) : onClick(onClick), normalColor(btnColor), currentColor(btnColor)
+    Button::Button(const std::function<void()>& onClick, Rectangle rect, Color btnColor, Text label) : onClick(onClick), rect(rect), normalColor(btnColor), currentColor(btnColor), label(label)
     {
         hoverColor = darken(btnColor, 0.8f);
-        rect = {x, y, width, height};
-        label = {content, fontSize, font, spacing, txtColor};
     };
 
     void Button::update()
@@ -23,7 +21,10 @@ namespace engine
 
         if (isHovered && IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
-            onClick();
+            if (onClick)
+            {
+                onClick();
+            }
         }
     };
 
@@ -32,9 +33,9 @@ namespace engine
         render.drawButton(*this);
     };
 
-    Color Button::darken(const Color& darken, const float factor) const
+    Color Button::darken(const Color& color, const float factor) const
     {
-        Color darkened = darken;
+        Color darkened = color;
         darkened.r = static_cast<unsigned char>(darkened.r * factor);
         darkened.g = static_cast<unsigned char>(darkened.g * factor);
         darkened.b = static_cast<unsigned char>(darkened.b * factor);
