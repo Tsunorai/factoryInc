@@ -64,11 +64,8 @@ namespace engine
         case EngineCommandType::Quit:
             shutdown();
             break;
-
-        case EngineCommandType::Restart:
-            break;
-
-        case EngineCommandType::ToggleFullscreen:
+        case EngineCommandType::ChangeScene:
+        
             break;
         default:
             break;

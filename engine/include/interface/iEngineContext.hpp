@@ -7,9 +7,10 @@ namespace engine
     struct EngineCommand;
     struct IEngineContext
     {
-        ~IEngineContext() = default;
+        virtual ~IEngineContext() = default;
         virtual void sendCommand(EngineCommand command) = 0;
 
+    protected:
         CommandQueue commands;
     };
 } // namespace engine
