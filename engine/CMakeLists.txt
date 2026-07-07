@@ -1,5 +1,9 @@
 file(GLOB ENGINE_SOURCES CONFIGURE_DEPENDS
     src/*.cpp
+    src/commands/*.cpp
+    src/input/*.cpp
+    src/render/*.cpp
+    src/structs/*.cpp
 )
 
 add_library(Engine ${ENGINE_SOURCES})

@@ -17,11 +17,11 @@ namespace FInc
         createMenu();
     }
 
-    engine::SceneResult MenuScene::update()
+    engine::SceneResult MenuScene::update(const engine::InputState& input)
     {
         for (auto& element : actors)
         {
-            element->update();
+            element->update(input);
         }
 
         return std::move(sceneResult);

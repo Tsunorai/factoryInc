@@ -1,15 +1,17 @@
 #include "structs/button.hpp"
 
+#include "input/inputState.hpp"
+
 namespace engine
 {
-    Button::Button(const std::function<void()>& onClick, const Rectangle rect, const Text label, const Color btnColor) : onClick(onClick), rect(rect), normalColor(btnColor), currentColor(btnColor), label(label)
+    Button::Button(const std::function<void()>& onClick, const Rectangle rect, const Text label, const Color btnColor) : onClick(onClick), rect(rect), label(label), normalColor(btnColor), currentColor(btnColor)
     {
         hoverColor = darken(btnColor, 0.8f);
     };
 
-    void Button::update()
+    void Button::update(const engine::InputState& input)
     {
-        bool isHovered = CheckCollisionPointRec(GetMousePosition(), rect);
+        bool isHovered = CheckCollisionPointRec(input.mouse.mousePosition, rect);
         if (isHovered && !hideHover)
         {
             currentColor = hoverColor;
@@ -19,7 +21,7 @@ namespace engine
             currentColor = normalColor;
         }
 
-        if (isHovered && IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        if (isHovered && input.mouse.mousePressed)
         {
             if (onClick)
             {

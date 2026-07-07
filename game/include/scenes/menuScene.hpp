@@ -8,11 +8,8 @@ namespace FInc
     {
     public:
         MenuScene();
-        engine::SceneResult update() override;
+        engine::SceneResult update(const engine::InputState& input) override;
         void render(const engine::Renderer& renderer) override;
-
-    public:
-        engine::SceneResult sceneResult = {engine::SceneAction::None};
     private:
         void createMenu();
     };

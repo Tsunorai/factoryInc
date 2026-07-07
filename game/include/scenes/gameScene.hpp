@@ -8,7 +8,7 @@ namespace FInc
     {
     public:
         GameScene();
-        engine::SceneResult update() override;
+        engine::SceneResult update(const engine::InputState& input) override;
         void render(const engine::Renderer& renderer) override;
     };
 } // namespace FInc

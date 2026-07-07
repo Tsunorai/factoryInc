@@ -1,9 +1,12 @@
-#include <game.hpp>
+#include "game.hpp"
+#include "engine.hpp"
 
 int main ()
 {
+    engine::Engine engine;
     FInc::Game game;
-    game.init();
-    game.run();
+
+    engine.init();
+    engine.run(game);
     return 0;
 }

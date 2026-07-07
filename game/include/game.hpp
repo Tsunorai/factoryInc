@@ -1,23 +1,27 @@
 #pragma once
 
-#include "engine.hpp"
+#include "interface/iEngineContext.hpp"
+#include "interface/iGame.hpp"
 #include "structs/scene.hpp"
+#include "render/render.hpp"
 
 #include <memory>
 
 namespace FInc
 {
-    struct Game
+    struct Game : engine::IGame
     {
     public:
-        void init();
-        void run();
+        void init(engine::IEngineContext& context) override;
 
     private:
-        void update();
+        void update(const engine::InputState& input, const float deltaTime) override;
+        void render(const engine::Renderer& renderer) override;
+        void shutdown() override {};
 
     private:
-        engine::Engine engine;
+        engine::IEngineContext* engineContext{};
+
         std::unique_ptr<engine::Scene> currentScene;
     };
 } // namespace FInc

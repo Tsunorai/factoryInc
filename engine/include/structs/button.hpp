@@ -12,17 +12,17 @@ namespace engine
     {
     public:
         Button(const std::function<void()>& onClick, Rectangle rect, Text label, Color btnColor = GRAY);
-        void update() override;
+        void update(const engine::InputState& input) override;
         void render(const Renderer& render) override;
 
         Color darken(const Color& color, const float factor) const;
 
+        std::function<void()> onClick;
         Rectangle rect;
+        Text label;
         Color normalColor;
         Color hoverColor;
         Color currentColor;
-        Text label;
-        std::function<void()> onClick;
 
         bool hideHover = false;
     };
