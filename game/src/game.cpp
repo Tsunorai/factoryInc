@@ -1,38 +1,37 @@
 #include "game.hpp"
 
+#include "commands/command.hpp"
+#include "input/inputState.hpp"
 #include "scenes/menuScene.hpp"
+
+#include <utility>
 
 namespace FInc
 {
-    void Game::init()
+    void Game::init(engine::IEngineContext& context)
     {
+        engineContext = &context;
         // load settings from file before init window
-        engine.init();
         currentScene = std::make_unique<MenuScene>();
     }
 
-    void Game::run()
+    void Game::update(const engine::InputState& input, const float deltaTime)
     {
-        while (engine.isRunning())
-        {
-            update();
-
-            engine.beginFrame();
-            currentScene->render(engine.getRenderer());
-            engine.endFrame();
-        }
-
-        engine.clean();
-    }
-
-    void Game::update()
-    {
-        engine::SceneResult result = currentScene->update();
+        engine::SceneResult result = currentScene->update(input);
 
         if (result.action == engine::SceneAction::ChangeScene)
         {
             currentScene = std::move(result.newScene);
             // currentScene->init();
         }
+        else if (result.action == engine::SceneAction::Quit)
+        {
+            engineContext->sendCommand(engine::EngineCommand(engine::EngineCommandType::Quit));
+        }
+    }
+
+    void Game::render(const engine::Renderer& renderer)
+    {
+        currentScene->render(renderer);
     }
 } // namespace FInc

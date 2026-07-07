@@ -11,18 +11,18 @@ namespace engine
     class Button : public Actor
     {
     public:
-        Button(const std::function<void()>& onClick, Rectangle rect, Color btnColor, Text label);
-        void update() override;
+        Button(const std::function<void()>& onClick, Rectangle rect, Text label, Color btnColor = GRAY);
+        void update(const engine::InputState& input) override;
         void render(const Renderer& render) override;
 
         Color darken(const Color& color, const float factor) const;
 
+        std::function<void()> onClick;
         Rectangle rect;
+        Text label;
         Color normalColor;
         Color hoverColor;
         Color currentColor;
-        Text label;
-        std::function<void()> onClick;
 
         bool hideHover = false;
     };

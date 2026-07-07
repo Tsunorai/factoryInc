@@ -2,7 +2,6 @@
 
 #include "scenes/menuScene.hpp"
 #include "engineMapping.hpp"
-#include "structs/keys.hpp"
 
 #include <iostream>
 #include <memory>
@@ -14,9 +13,10 @@ namespace FInc
         std::cout << "GameScene created" << std::endl;
     }
 
-    engine::SceneResult GameScene::update()
+    engine::SceneResult GameScene::update(const engine::InputState& input)
     {
-        if (engine::isKeyPressed(engine::KEY_ENTER))
+        // replace when a overlay is implemented
+        if (input.key.enter)
         {
             return {engine::SceneAction::ChangeScene, std::move(std::make_unique<MenuScene>())};
         }
@@ -25,6 +25,7 @@ namespace FInc
 
     void GameScene::render(const engine::Renderer& renderer)
     {
-        renderer.drawBackground(BLUE);
+        renderer.drawBackground(BLACK);
     }
 } // namespace FInc
+
