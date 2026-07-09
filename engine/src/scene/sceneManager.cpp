@@ -1,13 +1,14 @@
 #include "scene/sceneManager.hpp"
+#include <utility>
 
 namespace engine
 {
     void SceneManager::setStartScene(std::unique_ptr<IScene> scene)
     {
-        loadScene(scene);
+        loadScene(std::move(scene));
     }
 
-    void SceneManager::loadScene(std::unique_ptr<IScene>& scene)
+    void SceneManager::loadScene(std::unique_ptr<IScene> scene)
     {
         currentScene = std::move(scene);
         currentScene->enter();
@@ -16,7 +17,7 @@ namespace engine
     void SceneManager::changeScene(std::unique_ptr<IScene> scene)
     {
         currentScene->exit();
-        loadScene(scene);
+        loadScene(std::move(scene));
     }
 
     void SceneManager::update(EngineContext& ctx)

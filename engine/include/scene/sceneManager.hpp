@@ -10,7 +10,7 @@ namespace engine
     {
     public:
         void setStartScene(std::unique_ptr<IScene> scene);
-        void loadScene(std::unique_ptr<IScene>& scene);
+        void loadScene(std::unique_ptr<IScene> scene);
         void changeScene(std::unique_ptr<IScene> scene);
 
         void update(EngineContext& ctx);
