@@ -23,9 +23,7 @@ namespace engine
             }
 
             // add safety barrier to not subscribe on publishing same event. if engine survives.
-            std::vector<Callback>& callbacks = it->second;
-
-            for (Callback& callback : callbacks)
+            for (Callback& callback : it->second)
             {
                 callback(&event);
             }

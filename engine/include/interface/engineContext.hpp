@@ -10,31 +10,17 @@ namespace engine
 {
     struct EngineContext
     {
-        EngineContext(
-            Input& input,
-            CommandQueue& commands,
-            EventBus& events,
-            SceneManager& scenes,
-            Renderer& renderer,
-            float deltaTime)
-            : input(input),
-              commands(commands),
-              events(events),
-              scenes(scenes),
-              renderer(renderer),
-              deltaTime(deltaTime)
-        {
-        }
+        EngineContext() = default;
         
-        Input& input;
+        Input input;
 
-        CommandQueue& commands;
+        CommandQueue commands;
 
-        EventBus& events;
+        EventBus events;
 
-        SceneManager& scenes;
+        SceneManager scenes;
 
-        Renderer& renderer;
+        Renderer renderer;
 
         float deltaTime;
     };

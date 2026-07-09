@@ -2,7 +2,6 @@
 
 #include "input/inputManager.hpp"
 #include "interface/engineContext.hpp"
-#include "render/render.hpp"
 
 namespace engine
 {
@@ -11,16 +10,7 @@ namespace engine
     class Engine : public EngineContext
     {
     public:
-        Engine()
-            : EngineContext{
-                  input,
-                  commands,
-                  events,
-                  scenes,
-                  renderer,
-                  0.0f}
-        {
-        }
+        Engine() = default;
         void init();
         void run(IGame& game);
         void shutdown();
@@ -33,16 +23,8 @@ namespace engine
 
         bool isRunning();
 
-    public:
-        Input input{};
-
-        InputManager inputManager;
-        CommandQueue commands;
-        EventBus events;
-        SceneManager scenes;
-        Renderer renderer;
-
     private:
         bool exitRequested = false;
+        InputManager inputManager;
     };
 } // namespace engine

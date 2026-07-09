@@ -1,6 +1,6 @@
 file(GLOB ENGINE_SOURCES CONFIGURE_DEPENDS
     src/*.cpp
-    src/commands/*.cpp
+    src/command/*.cpp
     src/input/*.cpp
     src/render/*.cpp
     src/struct/*.cpp
