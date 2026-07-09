@@ -23,13 +23,14 @@ namespace engine
 
         while (isRunning())
         {
+            deltaTime = GetFrameTime();
             input = inputManager.pollInput();
+
             game.update(*this);
             commands.execute(*this);
 
             beginFrame();
             game.render(*this);
-
             endFrame();
 
             // events.Clear();

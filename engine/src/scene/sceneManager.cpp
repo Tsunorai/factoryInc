@@ -28,6 +28,4 @@ namespace engine
     {
         currentScene->render(ctx);
     }
-
-    std::unique_ptr<IScene> currentScene;
 } // namespace engine

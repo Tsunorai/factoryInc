@@ -6,20 +6,19 @@ namespace engine
 {
     struct MouseButton
     {
-        Vector2 mousePosition;
-
-        bool mousePressed;
-        bool mouseDown;
+        Vector2 mousePosition{0, 0};
+        
+        bool mousePressed = false;
+        bool mouseDown = false;
     };
 
     struct KeyboardKey
     {
-        bool enter;
-
-        bool w;
-        bool a;
-        bool s;
-        bool d;
+        bool enter = false;
+        bool w = false;
+        bool a = false;
+        bool s = false;
+        bool d = false;
     };
 
     struct Input

@@ -2,6 +2,8 @@
 
 #include <functional>
 #include <typeindex>
+#include <unordered_map>
+#include <vector>
 
 namespace engine
 {

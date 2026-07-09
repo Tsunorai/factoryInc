@@ -1,9 +1,11 @@
 #include "struct/button.hpp"
 #include "interface/engineContext.hpp"
+#include <utility>
 
 namespace engine
 {
-    Button::Button(const std::function<void()>& onClick, const Rectangle rect, const Text label, const Color btnColor) : onClick(onClick), rect(rect), label(label), normalColor(btnColor), currentColor(btnColor)
+    Button::Button(const std::function<void()>& onClick, Rectangle rect, Text label, Color btnColor)
+        : onClick(onClick), rect(rect), label(std::move(label)), normalColor(btnColor), currentColor(btnColor)
     {
         hoverColor = darken(btnColor, 0.8f);
     };

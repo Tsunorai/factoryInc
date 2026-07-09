@@ -2,9 +2,7 @@
 
 namespace engine
 {
-    struct InputState;
     struct EngineContext;
-    struct Renderer;
     struct IGame
     {
         virtual ~IGame() = default;

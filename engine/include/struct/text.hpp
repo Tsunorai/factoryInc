@@ -7,7 +7,7 @@ namespace engine
 {
     struct Text
     {
-        Text(const std::string content, const int fontSize = 20, const Font font = GetFontDefault(), const float spacing = 1.0f, const Color color = WHITE)
+        Text(std::string content, const int fontSize = 20, const Font font = GetFontDefault(), const float spacing = 1.0f, const Color color = WHITE)
             : content(std::move(content)), fontSize(fontSize), font(font), spacing(spacing), color(color) {};
         std::string content;
         int fontSize;
