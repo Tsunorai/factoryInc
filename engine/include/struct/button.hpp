@@ -1,19 +1,19 @@
 #pragma once
 
-#include "structs/actor.hpp"
-#include "structs/text.hpp"
+#include "struct/text.hpp"
 
 #include <functional>
 #include <raylib.h>
 
 namespace engine
 {
-    class Button : public Actor
+    struct EngineContext;
+    class Button
     {
     public:
         Button(const std::function<void()>& onClick, Rectangle rect, Text label, Color btnColor = GRAY);
-        void update(const engine::InputState& input) override;
-        void render(const Renderer& render) override;
+        void update(engine::EngineContext&);
+        void render(engine::EngineContext&);
 
         Color darken(const Color& color, const float factor) const;
 

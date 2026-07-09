@@ -1,17 +1,18 @@
-#include "structs/button.hpp"
-
-#include "input/inputState.hpp"
+#include "struct/button.hpp"
+#include "interface/engineContext.hpp"
+#include <utility>
 
 namespace engine
 {
-    Button::Button(const std::function<void()>& onClick, const Rectangle rect, const Text label, const Color btnColor) : onClick(onClick), rect(rect), label(label), normalColor(btnColor), currentColor(btnColor)
+    Button::Button(const std::function<void()>& onClick, Rectangle rect, Text label, Color btnColor)
+        : onClick(onClick), rect(rect), label(std::move(label)), normalColor(btnColor), currentColor(btnColor)
     {
         hoverColor = darken(btnColor, 0.8f);
     };
 
-    void Button::update(const engine::InputState& input)
+    void Button::update(engine::EngineContext& ctx)
     {
-        bool isHovered = CheckCollisionPointRec(input.mouse.mousePosition, rect);
+        bool isHovered = CheckCollisionPointRec(ctx.input.mouse.mousePosition, rect);
         if (isHovered && !hideHover)
         {
             currentColor = hoverColor;
@@ -21,7 +22,7 @@ namespace engine
             currentColor = normalColor;
         }
 
-        if (isHovered && input.mouse.mousePressed)
+        if (isHovered && ctx.input.mouse.mousePressed)
         {
             if (onClick)
             {
@@ -30,9 +31,9 @@ namespace engine
         }
     };
 
-    void Button::render(const Renderer& render)
+    void Button::render(engine::EngineContext& ctx)
     {
-        render.drawButton(*this);
+        ctx.renderer.drawButton(*this);
     };
 
     Color Button::darken(const Color& color, const float factor) const

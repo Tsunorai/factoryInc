@@ -1,15 +1,15 @@
 #pragma once
 
-#include "inputState.hpp"
+#include "input.hpp"
 
 namespace engine
 {
     class InputManager
     {
     public:
-        InputState pollInput();
-        void pollMouseInput(InputState& input);
-        void pollKeyboardInput(InputState& input);
+        Input pollInput();
+        void pollMouseInput(Input& input);
+        void pollKeyboardInput(Input& input);
 
     };
 } // namespace engine

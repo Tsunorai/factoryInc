@@ -1,31 +1,31 @@
 #include "input/inputManager.hpp"
 
-#include "input/inputState.hpp"
+#include "input/input.hpp"
 
 #include <raylib.h>
 
 namespace engine
 {
-    InputState InputManager::pollInput()
+    Input InputManager::pollInput()
     {
-        InputState input;
-
+        Input input{};
         pollMouseInput(input);
         pollKeyboardInput(input);
-
         return input;
     }
-
-    void InputManager::pollMouseInput(InputState& input)
+    void InputManager::pollMouseInput(Input& input)
     {
         input.mouse.mousePosition = GetMousePosition();
         input.mouse.mouseDown = IsMouseButtonDown(MOUSE_BUTTON_LEFT);
         input.mouse.mousePressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
     }
-
-    void InputManager::pollKeyboardInput(InputState& input)
+    void InputManager::pollKeyboardInput(Input& input)
     {
         input.key.enter = IsKeyPressed(KEY_ENTER);
+        input.key.w = IsKeyDown(KEY_W);
+        input.key.a = IsKeyDown(KEY_A);
+        input.key.s = IsKeyDown(KEY_S);
+        input.key.d = IsKeyDown(KEY_D);
     }
 
 } // namespace engine
