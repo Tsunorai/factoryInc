@@ -1,7 +1,8 @@
-#include "scenes/gameScene.hpp"
+#include "scene/gameScene.hpp"
 
-#include "scenes/menuScene.hpp"
+#include "command/changeSceneCommand.hpp"
 #include "engineMapping.hpp"
+#include "scene/menuScene.hpp"
 
 #include <iostream>
 #include <memory>
@@ -13,19 +14,17 @@ namespace FInc
         std::cout << "GameScene created" << std::endl;
     }
 
-    engine::SceneResult GameScene::update(const engine::InputState& input)
+    void GameScene::update(engine::EngineContext& ctx)
     {
         // replace when a overlay is implemented
-        if (input.key.enter)
+        if (ctx.input.key.enter)
         {
-            return {engine::SceneAction::ChangeScene, std::move(std::make_unique<MenuScene>())};
+            ctx.commands.enqueue<engine::ChangeSceneCommand>(std::make_unique<MenuScene>(ctx));
         }
-        return {engine::SceneAction::None};
     }
 
-    void GameScene::render(const engine::Renderer& renderer)
+    void GameScene::render(engine::EngineContext& ctx)
     {
-        renderer.drawBackground(BLACK);
+        ctx.renderer.drawBackground(BLACK);
     }
 } // namespace FInc
-

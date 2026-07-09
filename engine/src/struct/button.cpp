@@ -1,6 +1,5 @@
-#include "structs/button.hpp"
-
-#include "input/inputState.hpp"
+#include "struct/button.hpp"
+#include "interface/engineContext.hpp"
 
 namespace engine
 {
@@ -9,9 +8,9 @@ namespace engine
         hoverColor = darken(btnColor, 0.8f);
     };
 
-    void Button::update(const engine::InputState& input)
+    void Button::update(engine::EngineContext& ctx)
     {
-        bool isHovered = CheckCollisionPointRec(input.mouse.mousePosition, rect);
+        bool isHovered = CheckCollisionPointRec(ctx.input.mouse.mousePosition, rect);
         if (isHovered && !hideHover)
         {
             currentColor = hoverColor;
@@ -21,7 +20,7 @@ namespace engine
             currentColor = normalColor;
         }
 
-        if (isHovered && input.mouse.mousePressed)
+        if (isHovered && ctx.input.mouse.mousePressed)
         {
             if (onClick)
             {
@@ -30,9 +29,9 @@ namespace engine
         }
     };
 
-    void Button::render(const Renderer& render)
+    void Button::render(engine::EngineContext& ctx)
     {
-        render.drawButton(*this);
+        ctx.renderer.drawButton(*this);
     };
 
     Color Button::darken(const Color& color, const float factor) const

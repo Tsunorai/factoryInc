@@ -22,7 +22,7 @@ namespace engine
         bool d;
     };
 
-    struct InputState
+    struct Input
     {
         MouseButton mouse;
         KeyboardKey key;

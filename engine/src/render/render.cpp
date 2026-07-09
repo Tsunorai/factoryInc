@@ -1,6 +1,6 @@
 #include "render/render.hpp"
 
-#include "structs/button.hpp"
+#include "struct/button.hpp"
 
 namespace engine
 {

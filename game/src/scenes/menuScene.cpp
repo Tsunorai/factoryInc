@@ -1,47 +1,57 @@
-#include "scenes/menuScene.hpp"
+#include "scene/menuScene.hpp"
 
+#include "command/changeSceneCommand.hpp"
+#include "command/quitCommand.hpp"
 #include "engineMapping.hpp"
-#include "scenes/gameScene.hpp"
-#include "structs/button.hpp"
-#include "structs/text.hpp"
+#include "scene/gameScene.hpp"
+#include "struct/button.hpp"
+#include "struct/text.hpp"
 
 #include <iostream>
 #include <memory>
 
 namespace FInc
 {
-    MenuScene::MenuScene()
+    MenuScene::MenuScene(engine::EngineContext& ctx)
     {
         std::cout << "MenuScene created" << std::endl;
-        createMenu();
+        createMenu(ctx);
     }
 
-    engine::SceneResult MenuScene::update(const engine::InputState& input)
+    void MenuScene::enter()
     {
-        for (auto& element : actors)
-        {
-            element->update(input);
-        }
-
-        return std::move(sceneResult);
+        std::cout << "MenuScene::enter" << std::endl;
     }
 
-    void MenuScene::render(const engine::Renderer& renderer)
+    void MenuScene::update(engine::EngineContext& ctx)
+    {
+        for (auto& element : buttons)
+        {
+            element->update(ctx);
+        }
+    }
+
+    void MenuScene::render(engine::EngineContext& ctx)
     {
         // todo have non raylib colors
-        renderer.drawBackground(BLACK);
-        for (const auto& actor : actors)
+        ctx.renderer.drawBackground(BLACK);
+        for (const auto& button : buttons)
         {
-            actor->render(renderer);
+            button->render(ctx);
         }
     }
 
-    void MenuScene::createMenu()
+    void MenuScene::exit()
+    {
+        std::cout << "MenuScene::exit" << std::endl;
+    }
+
+    void MenuScene::createMenu(engine::EngineContext& ctx)
     {
         // will be replaced by configuration in json or something
 
-        auto playFunc = [this]() {
-            sceneResult = {engine::SceneAction::ChangeScene, std::make_unique<GameScene>()};
+        auto playFunc = [ctx]() {
+            ctx.commands.enqueue<engine::ChangeSceneCommand>(std::make_unique<GameScene>());
         };
 
         // todo menu creation on replace withouth raylib reference
@@ -49,7 +59,7 @@ namespace FInc
         engine::Text label("Play");
 
         auto btn = std::make_unique<engine::Button>(playFunc, rect, label);
-        actors.push_back(std::move(btn));
+        buttons[0] = std::move(btn);
 
         auto settingsFunc = []() {
             std::cout << "Settings button clicked WIP" << std::endl;
@@ -60,10 +70,10 @@ namespace FInc
         engine::Text label2("Settings");
 
         auto btn2 = std::make_unique<engine::Button>(settingsFunc, rect2, label2);
-        actors.push_back(std::move(btn2));
+        buttons[1] = std::move(btn2);
 
-        auto quitFunc = [this]() {
-            sceneResult = {engine::SceneAction::Quit};
+        auto quitFunc = [ctx]() {
+            ctx.commands.enqueue<engine::QuitCommand>();
         };
 
         // todo menu creation on replace withouth raylib reference
@@ -71,6 +81,6 @@ namespace FInc
         engine::Text label3("Quit");
 
         auto btn3 = std::make_unique<engine::Button>(quitFunc, rect3, label3);
-        actors.push_back(std::move(btn3));
+        buttons[2] = std::move(btn3);
     }
 } // namespace FInc

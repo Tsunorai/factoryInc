@@ -1,6 +1,6 @@
 #include "engine.hpp"
 
-#include "commands/command.hpp"
+#include "command/iCommand.hpp"
 #include "interface/iGame.hpp"
 #include "render/render.hpp"
 
@@ -23,17 +23,16 @@ namespace engine
 
         while (isRunning())
         {
-            game.update(inputManager.pollInput(), GetFrameTime());
-
-            for (auto& command : commands.consume())
-            {
-                processCommand(command);
-            }
+            input = inputManager.pollInput();
+            game.update(*this);
+            commands.execute(*this);
 
             beginFrame();
-            game.render(renderer);
+            game.render(*this);
 
             endFrame();
+
+            // events.Clear();
         }
 
         game.shutdown();
@@ -52,26 +51,6 @@ namespace engine
         CloseWindow();
     }
 
-    void Engine::sendCommand(const EngineCommand command)
-    {
-        commands.push(command);
-    }
-
-    void Engine::processCommand(const EngineCommand& command)
-    {
-        switch (command.type)
-        {
-        case EngineCommandType::Quit:
-            shutdown();
-            break;
-        case EngineCommandType::ChangeScene:
-        
-            break;
-        default:
-            break;
-        }
-    }
-
     void Engine::beginFrame()
     {
         renderer.beginFrame();
@@ -80,11 +59,6 @@ namespace engine
     void Engine::endFrame()
     {
         renderer.endFrame();
-    }
-
-    const Renderer& Engine::getRenderer() const
-    {
-        return renderer;
     }
 
     bool Engine::isRunning()

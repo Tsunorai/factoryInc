@@ -1,14 +1,14 @@
 #include "input/inputManager.hpp"
 
-#include "input/inputState.hpp"
+#include "input/input.hpp"
 
 #include <raylib.h>
 
 namespace engine
 {
-    InputState InputManager::pollInput()
+    Input InputManager::pollInput()
     {
-        InputState input;
+        Input input;
 
         pollMouseInput(input);
         pollKeyboardInput(input);
@@ -16,14 +16,14 @@ namespace engine
         return input;
     }
 
-    void InputManager::pollMouseInput(InputState& input)
+    void InputManager::pollMouseInput(Input& input)
     {
         input.mouse.mousePosition = GetMousePosition();
         input.mouse.mouseDown = IsMouseButtonDown(MOUSE_BUTTON_LEFT);
         input.mouse.mousePressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
     }
 
-    void InputManager::pollKeyboardInput(InputState& input)
+    void InputManager::pollKeyboardInput(Input& input)
     {
         input.key.enter = IsKeyPressed(KEY_ENTER);
     }

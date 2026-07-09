@@ -3,7 +3,8 @@ file(GLOB ENGINE_SOURCES CONFIGURE_DEPENDS
     src/commands/*.cpp
     src/input/*.cpp
     src/render/*.cpp
-    src/structs/*.cpp
+    src/struct/*.cpp
+    src/scene/*.cpp
 )
 
 add_library(Engine ${ENGINE_SOURCES})
