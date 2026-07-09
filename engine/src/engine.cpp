@@ -32,8 +32,6 @@ namespace engine
             beginFrame();
             game.render(*this);
             endFrame();
-
-            // events.Clear();
         }
 
         game.shutdown();

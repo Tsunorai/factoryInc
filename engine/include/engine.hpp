@@ -34,7 +34,7 @@ namespace engine
         bool isRunning();
 
     public:
-        Input input;
+        Input input{};
 
         InputManager inputManager;
         CommandQueue commands;

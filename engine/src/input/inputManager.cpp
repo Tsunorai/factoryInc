@@ -22,10 +22,10 @@ namespace engine
     void InputManager::pollKeyboardInput(Input& input)
     {
         input.key.enter = IsKeyPressed(KEY_ENTER);
-        input.key.w = IsKeyPressed(KEY_W);
-        input.key.a = IsKeyPressed(KEY_A);
-        input.key.s = IsKeyPressed(KEY_S);
-        input.key.d = IsKeyPressed(KEY_D);
+        input.key.w = IsKeyDown(KEY_W);
+        input.key.a = IsKeyDown(KEY_A);
+        input.key.s = IsKeyDown(KEY_S);
+        input.key.d = IsKeyDown(KEY_D);
     }
 
 } // namespace engine

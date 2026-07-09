@@ -1,14 +1,12 @@
 #pragma once
 
-#include "render/render.hpp"
-
 namespace engine
 {
-    struct InputState;
+    struct EngineContext;
     struct Actor
     {
-        virtual void update(const engine::InputState& input) = 0;
-        virtual void render(const Renderer& render) = 0;
+        virtual void update(engine::EngineContext&) = 0;
+        virtual void render(engine::EngineContext&) = 0;
 
         virtual ~Actor() {}
     };

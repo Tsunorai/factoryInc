@@ -50,7 +50,7 @@ namespace FInc
     {
         // will be replaced by configuration in json or something
 
-        auto playFunc = [ctx]() {
+        auto playFunc = [&ctx]() {
             ctx.commands.enqueue<engine::ChangeSceneCommand>(std::make_unique<GameScene>());
         };
 
@@ -72,7 +72,7 @@ namespace FInc
         auto btn2 = std::make_unique<engine::Button>(settingsFunc, rect2, label2);
         buttons[1] = std::move(btn2);
 
-        auto quitFunc = [ctx]() {
+        auto quitFunc = [&ctx]() {
             ctx.commands.enqueue<engine::QuitCommand>();
         };
 

@@ -7,7 +7,7 @@ namespace engine
     struct MouseButton
     {
         Vector2 mousePosition{0, 0};
-        
+
         bool mousePressed = false;
         bool mouseDown = false;
     };
