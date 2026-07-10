@@ -1,7 +1,7 @@
 #include "scene/gameScene.hpp"
 
 #include "command/changeSceneCommand.hpp"
-#include "engineMapping.hpp"
+#include "engineMapper.hpp"
 #include "scene/menuScene.hpp"
 
 #include <iostream>
@@ -12,6 +12,12 @@ namespace FInc
     GameScene::GameScene()
     {
         std::cout << "GameScene created" << std::endl;
+    }
+
+    void GameScene::enter()
+    {
+        // load textures and stuff
+        std::cout << "GameScene::enter" << std::endl;
     }
 
     void GameScene::update(engine::EngineContext& ctx)
@@ -25,6 +31,23 @@ namespace FInc
 
     void GameScene::render(engine::EngineContext& ctx)
     {
-        ctx.renderer.drawBackground(BLACK);
+        renderBackground(ctx);
+        renderEntities(ctx);
+    }
+
+    void GameScene::renderBackground(engine::EngineContext& ctx)
+    {
+        ctx.renderer.drawBackground(GRAY);
+        // todo grid
+    }
+
+    void GameScene::renderEntities(engine::EngineContext& ctx)
+    {
+        // todo maschines and entities
+    }
+
+    void GameScene::exit()
+    {
+        std::cout << "GameScene::exit" << std::endl;
     }
 } // namespace FInc
